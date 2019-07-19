@@ -1,5 +1,7 @@
 #!/usr/bin/env Rscript
 library(DESeq2)
+library(ggplot2)
+source("code/qqunif.plot.R")
 
 data = read.table("output/GTEX_oligoCounts_byVar.txt", header = T)
 
@@ -19,5 +21,14 @@ names(results_oligo) = paste0(names(results_oligo),"_", "oligo")
 names(results_allele) = paste0(names(results_allele),"_", "allele")
 
 results_DESeq2 = cbind(data, as.data.frame(results_material), as.data.frame(results_oligo), as.data.frame(results_allele))
-write.table(results_DESeq2, "1KG_DESeq2_results.txt", quote = F, sep = "\t", row.names = F, col.names = T)
+write.table(results_DESeq2, "output/GTEX_DESeq2_results.txt", quote = F, sep = "\t", row.names = F, col.names = T)
+
+results_DESeq2$chr = sub("chrom=","", results_DESeq2$chr)
+results_DESeq2$pos = sub("pos=","", results_DESeq2$pos)
+
+annotations = read.table("output/mpra.variants.txt", header= T)
+results_annotated = merge(results_DESeq2, annotations, by.x = c("chr","pos"), by.y = c("Chrom","Stop"))
+qqunif.plot(list("control" = results_annotated[which(results_annotated$Type == "Control"), "pvalue_oligo"], 
+                 "outlier" = results_annotated[which(results_annotated$Type == "Outlier"), "pvalue_oligo"]),
+            xlim = c(0,4), aspect = "fill", should.thin = F, auto.key=list(corner=c(.05,.95)))
 
