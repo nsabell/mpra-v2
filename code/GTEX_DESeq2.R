@@ -28,7 +28,12 @@ results_DESeq2$pos = sub("pos=","", results_DESeq2$pos)
 
 annotations = read.table("output/mpra.variants.txt", header= T)
 results_annotated = merge(results_DESeq2, annotations, by.x = c("chr","pos"), by.y = c("Chrom","Stop"))
-qqunif.plot(list("control" = results_annotated[which(results_annotated$Type == "Control"), "pvalue_oligo"], 
-                 "outlier" = results_annotated[which(results_annotated$Type == "Outlier"), "pvalue_oligo"]),
-            xlim = c(0,4), aspect = "fill", should.thin = F, auto.key=list(corner=c(.05,.95)))
 
+pdf("plots/GTEX_DESeq2_QQ.pdf")
+qqunif.plot(list("control" = results_annotated[which(results_annotated$Type == "Control"), "pvalue_expr"], 
+                 "outlier" = results_annotated[which(results_annotated$Type == "Outlier"), "pvalue_expr"]),
+            xlim = c(0,4), aspect = "fill", should.thin = F, auto.key=list(corner=c(.05,.95)), main = "Expression Effects")
+qqunif.plot(list("control" = results_annotated[which(results_annotated$Type == "Control"), "pvalue_allele"], 
+                 "outlier" = results_annotated[which(results_annotated$Type == "Outlier"), "pvalue_allele"]),
+            xlim = c(0,4), aspect = "fill", should.thin = F, auto.key=list(corner=c(.05,.95)),main = "Allelic Effects")
+dev.off()
