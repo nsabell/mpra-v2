@@ -34,4 +34,3 @@ samtools view ${OUTPFX}Aligned.sortedByCoord.out.bam  | \
     sed 's/AS:i://' | \
     sed 's/NM:i://' | \
     sort -k 1 >  ${OUTPFX}_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt
-
