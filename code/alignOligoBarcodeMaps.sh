@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-module load STAR/2.4.1a
-module load samtools
+samtools=bin/samtools
+STAR=bin/STAR
 
 FASTQ=$R1
 OUTPFX=$R2
