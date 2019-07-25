@@ -1,19 +1,20 @@
 ## mpra-v2: analysis of eQTL-derived massively paralell reporter assay data
 
-### Build oligo-barcode maps
-`code/mergePairs.sh data/rawdata/gtex/GTEX_R1.fastq.gz data/rawdata/gtex/GTEX_R2.fastq.gz data/processed/gtex/fastq/GTEX`
-`code/preprocessPairs.py data/processed/gtex/GTEX.extendedFrags.fastq.gz data/processed/gtex/`
+### Prepare oligo-barcode read pairs
+`bash code/mergePairs.sh <R1.fastq.gz> <R2.fastq.gz> <output_prefix>`
+`python code/preprocessPairs.py <merged.fastq.gz> <output_prefix>`
 
-GTEX_R1/2.fastq.gz -> GTEX.extendedFrags.fastq.gz FLASH
-GTEX.extendedFrags.fastq.gz -> GTEX_pairMerged_processed.fq PREPROCESS-BARCODES
-	GTEX_pairMerged_processed.fq -> GTEX_pairMerged_sorted.bam BWA+REFERENCE
-	GTEX_pairMerged_processed.fq -> GTEXAligned.sortedByCoord.out.bam STAR+REFERENCE
-GTEXAligned.sortedByCoord.out.bam -> 
+### Build oligo-barcode maps
+`bash buildReferences.sh` (this step is only required once per oligo library)
+`bash alignOligoBarcodeMaps.sh`
+`python writeBarcodeOligoMapNonUnique.py`
+`python writeBarcodeOligoMap.py`
 
 
 ### Extract barcode counts and oligo sums from FASTQ
-`code/extractBarcodeCounts.sh`
-`code/computeOligoSums.sh`
+`bash code/countBarcodes.sh`
+`python code/writeOligoSums.py`
+`Rscript code/mergeOligoSums.R`
 
 ### 
 
