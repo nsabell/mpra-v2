@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 
+# Command log executed on durga, in contrast to template commands in main README.md
+
 # Build oligo-barcode maps
 code/mergePairs.sh data/rawdata/gtex/GTEX_R1.fastq.gz \
                     data/rawdata/gtex/GTEX_R2.fastq.gz \
-                    data/processed/gtex/fastq/GTEX`
+                    data/processed/gtex/fastq/GTEX > \
+                    data/processed/gtex/fastq/GTEX_flash.log 2>&1 &
 code/mergePairs.sh data/rawdata/novaseq/MPRApool_1/MPRApool_1_S1_L001_R1_001.fastq.gz \
                     data/rawdata/novaseq/MPRApool_1/MPRApool_1_S1_L001_R2_001.fastq.gz \
                     data/processed/1KG/fastq/1KGp1 > \
-                    data/processed/1KG/fastq/1KGp1_flash.log 2>&1 &`
+                    data/processed/1KG/fastq/1KGp1_flash.log 2>&1 &
 code/mergePairs.sh data/rawdata/novaseq/MPRApool_2/MPRApool_1_S1_L002_R1_001.fastq.gz \
                     data/rawdata/novaseq/MPRApool_2/MPRApool_1_S1_L002_R2_001.fastq.gz \
                     data/processed/1KG/fastq/1KGp2 > \
-                    data/processed/1KG/fastq/1KGp2_flash.log 2>&1 &`
+                    data/processed/1KG/fastq/1KGp2_flash.log 2>&1 &
 
 code/preprocessPairs.py data/processed/gtex/GTEX.extendedFrags.fastq.gz data/processed/gtex/
 
