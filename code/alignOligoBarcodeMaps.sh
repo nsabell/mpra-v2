@@ -3,13 +3,14 @@
 samtools=bin/samtools
 STAR=bin/STAR
 
-FASTQ=$R1
-OUTPFX=$R2
-REF=$R3
+FASTQ=$1
+OUTPFX=$2
+REF=$3
 
 STAR --runThreadN 20 \
      --genomeDir $REF \
      --readFilesIn $FASTQ \
+     --readFilesCommand zcat \
      --outFilterMismatchNoverLmax 0.05 \
      --alignIntronMax 1 \
      --outSAMtype BAM SortedByCoordinate \

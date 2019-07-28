@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 
-# Nathan Abell
-# Montgomery Lab
-# Stanford University
-
 # preprocess_merged_pairs.py <input_fastq_from_flash>
 
 import sys
@@ -11,9 +7,9 @@ import gzip
 
 outname = sys.argv[2]
 
-#with gzip.open(outname, 'wb') as outfile, gzip.open(sys.argv[1], 'rb') as file:
+with gzip.open(outname, 'wb') as outfile, gzip.open(sys.argv[1], 'rb') as file:
 
-with open(outname, 'w') as outfile, open(sys.argv[1], 'r') as file:
+#with open(outname, 'w') as outfile, open(sys.argv[1], 'r') as file:
 
 	while True:
 
