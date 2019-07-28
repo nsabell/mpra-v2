@@ -10,7 +10,6 @@
 `python writeBarcodeOligoMapNonUnique.py <nonunique_maps> <output_file>`  
 `python writeBarcodeOligoMap.py <combined_maps> <output_file>`  
 
-
 ### Extract barcode counts and oligo sums from FASTQ
 `bash code/countBarcodes.sh`  
 `python code/writeOligoSums.py`  

@@ -10,7 +10,6 @@ REF=$3
 STAR --runThreadN 20 \
      --genomeDir $REF \
      --readFilesIn $FASTQ \
-     --readFilesCommand zcat \
      --outFilterMismatchNoverLmax 0.05 \
      --alignIntronMax 1 \
      --outSAMtype BAM SortedByCoordinate \

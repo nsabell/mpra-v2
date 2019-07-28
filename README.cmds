@@ -18,12 +18,16 @@ code/mergePairs.sh data/rawdata/novaseq/MPRApool_2/MPRApool_1_S1_L002_R1_001.fas
                    data/rawdata/novaseq/MPRApool_2/MPRApool_1_S1_L002_R2_001.fastq.gz \
                    data/processed/1KG/fastq/1KGp2 > \
                    data/processed/1KG/fastq/1KGp2_flash.log 2>&1 &
+
 code/preprocessPairs.py data/processed/1KG/fastq/1KGp1.extendedFrags.fastq.gz data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.fastq.gz
 code/preprocessPairs.py data/processed/1KG/fastq/1KGp2.extendedFrags.fastq.gz data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.fastq.gz
+
+code/filterShortPairs.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.fastq.gz data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.filtered.fastq
+code/filterShortPairs.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.fastq.gz data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.filtered.fastq
 
 # Build references and align to oligo library
 code/buildReferences.sh
 
-alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.fastq.gz data/processed/1KG/bam/1KGp1 data/reference/1KG/STAR
-alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.fastq.gz data/processed/1KG/bam/1KGp2 data/reference/1KG/STAR
+code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.filtered.fastq data/processed/1KG/bam/1KGp1 data/reference/1KG/STAR
+code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.filtered.fastq data/processed/1KG/bam/1KGp2 data/reference/1KG/STAR
 
