@@ -5,7 +5,7 @@
 `python code/preprocessPairs.py <merged_fastq> <output_prefix>`  
 
 ### Build oligo-barcode maps
-`bash buildReferences.sh` (this step is only required once per oligo library)  
+`bash code/buildReferences.sh` (this step is only required once per oligo library)  
 `bash alignOligoBarcodeMaps.sh <merged_fastq> <output_prefix> <STAR_reference>`  
 `python writeBarcodeOligoMapNonUnique.py <nonunique_maps> <output_file>`  
 `python writeBarcodeOligoMap.py <combined_maps> <output_file>`  
