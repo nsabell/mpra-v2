@@ -31,6 +31,30 @@ code/buildReferences.sh
 code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.filtered.fastq data/processed/1KG/bam/1KGp1 data/reference/1KG/STAR
 code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.filtered.fastq data/processed/1KG/bam/1KGp2 data/reference/1KG/STAR
 
-cat 1KGp1_STAR_rawOligoBarcodeMap_uniqueMaps.txt 1KGp2_STAR_rawOligoBarcodeMap_uniqueMaps.txt > 1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt
-cat 1KGp1_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt 1KGp2_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt > 1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt
+nohup code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.filtered.fastq /users/nsabell/scratch/mpra-v2/1KGp1 data/reference/1KG/STAR &
+nohup code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.filtered.fastq /users/nsabell/scratch/mpra-v2/1KGp2 data/reference/1KG/STAR &
+
+cat data/processed/1KG/bam/1KGp1_STAR_rawOligoBarcodeMap_uniqueMaps.txt data/processed/1KG/bam/1KGp2_STAR_rawOligoBarcodeMap_uniqueMaps.txt > data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt
+cat data/processed/1KG/bam/1KGp1_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt data/processed/1KG/bam/1KGp2_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt > data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt
+
+code/writeBarcodeOligoMapNonUnique.py \
+	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt \
+	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
+	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.log
+
+cat data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt \
+	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
+	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt
+
+code/writeBarcodeOligoMap.py \
+	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt \
+	data/processed/1KG/1KG_STAR_filteredOligoBarcodeMap.txt > \
+	data/processed/1KG/1KG_STAR_filteredOligoBarcodeMap.log
+
+
+
+
+
+
+
 
