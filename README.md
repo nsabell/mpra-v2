@@ -12,8 +12,8 @@
 `python writeBarcodeOligoMap.py <combined_maps> <output_file>`  
 
 ### Extract barcode counts and oligo sums from FASTQ
-`bash code/countBarcodes.sh`  
-`python code/writeOligoSums.py`  
+`bash code/countBarcodes.sh <input_fastq> <output_file>`  
+`python code/writeOligoSums.py <barcode_map> <barcode_counts> <output_file>`  
 `Rscript code/mergeOligoSums.R`  
 
 ### 

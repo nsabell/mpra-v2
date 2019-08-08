@@ -58,6 +58,12 @@ for file in data/rawdata/1KG/1KG*fastq.gz ; do
 	code/countBarcodes.sh $file data/processed/1KG/barcodeCounts/$outname.txt &
 done
 
+# Compute oligo sums for all samples
+for file in data/processed/1KG/barcodeCounts/*.txt ; do
+	outname=`basename $file | cut -d . -f 1`;
+	echocode/writeOligoSums.py data/processed/1KG/1KG_STAR_filteredOligoBarcodeMap.txt $file output/$outname.oligoCount.txt &
+done
+
 
 
 
