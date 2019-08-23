@@ -1,4 +1,4 @@
-## mpra-v2: analysis of eQTL-derived massively paralell reporter assay data
+## mpra-v2: analysis of eQTL-derived massively paralell reporter assay data and related utilities
 
 ### Prepare oligo-barcode read pairs
 `bash code/mergePairs.sh <R1_FASTQ> <R2_FASTQ> <output_prefix>`  
@@ -16,5 +16,14 @@
 `python code/writeOligoSums.py <barcode_map> <barcode_counts> <output_file>`  
 `Rscript code/mergeOligoSums.R`  
 
-### 
+### Quality control for barcode- and oligo-level analyses
+
+#### Compute the distribution of Hamming distances for a random subset of barcodes
+`python code/sampleHammingDistances.py <barcode_counts> <sample_n>`
+
+#### Merge barcode counts, plot, and compute correlations
+`R code/barcodeCorrelations.R <barcode_counts_1> ... <barcode_counts_n>`
+
+#### 
+
 

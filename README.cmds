@@ -61,8 +61,28 @@ done
 # Compute oligo sums for all samples
 for file in data/processed/1KG/barcodeCounts/*.txt ; do
 	outname=`basename $file | cut -d . -f 1`;
-	echocode/writeOligoSums.py data/processed/1KG/1KG_STAR_filteredOligoBarcodeMap.txt $file output/$outname.oligoCount.txt &
+	code/writeOligoSums.py scratch/1KG_STAR_filteredOligoBarcodeMap.txt $file output/$outname.oligoCount.txt &
 done
+
+# Merge oligo sums across samples
+code/mergeOligoSums.R 
+
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
