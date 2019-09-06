@@ -11,6 +11,10 @@
 `python writeBarcodeOligoMapNonUnique.py <nonunique_maps> <output_file>`  
 `python writeBarcodeOligoMap.py <combined_maps> <output_file>`  
 
+### Extract barcodes from FASTQ and cluster using Bartender
+`bash code/barcodeClustering.sh`
+`Rscript code/explorBarcodeClusters.R <bartender_output_directory> <output_prefix>`
+
 ### Extract barcode counts and oligo sums from FASTQ
 `bash code/countBarcodes.sh <input_fastq> <output_file>`  
 `python code/writeOligoSums.py <barcode_map> <barcode_counts> <output_file>`  
