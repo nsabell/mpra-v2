@@ -1,20 +1,18 @@
 ## FineMapMPRA - Nathan S. Abell and Stephen B. Montgomery
 
-### Prepare oligo-barcode read pairs
+### MPRA Data Bioinformatics
 `bash code/mergePairs.sh <R1_FASTQ> <R2_FASTQ> <output_prefix>`  
 `python code/preprocessPairs.py <merged_fastq> <output_prefix>`
 
-### Build oligo-barcode maps
 `bash code/buildReferences.sh` (this step is only required once per oligo library)  
 `bash alignOligoBarcodeMaps.sh <merged_fastq> <output_prefix> <STAR_reference>`  
 `python writeBarcodeOligoMapNonUnique.py <nonunique_maps> <output_file>`  
 `python writeBarcodeOligoMap.py <combined_maps> <output_file>`  
 
-### Cluster barcodes and compute count matrix
 `bash code/barcodeClustering.sh`
 `Rscript code/computeOligoCounts.R`
 
-### Statistical inference and molecular analysis
+### Statistical Inference and Molecular Analysis
 
 1. [Overview and Replicate Correlations](notebooks/section1-descriptive-statistics.ipynb)
 2. [MPRA Statistical Inference](notebooks/section2-model-inference.ipynb)
