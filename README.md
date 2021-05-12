@@ -1,4 +1,4 @@
-## FineMapMPRA - Nathan S. Abell and Stephen B. Montgomery
+## FineMapMPRA - Public Repository
 
 ### MPRA Data Bioinformatics
 `bash code/mergePairs.sh <R1_FASTQ> <R2_FASTQ> <output_prefix>`  
