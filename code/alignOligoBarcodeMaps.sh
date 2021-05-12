@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-samtools=./bin/samtools
-STAR=./bin/STAR
-
 FASTQ=$1
 OUTPFX=$2
 REF=$3
 
-STAR --runThreadN 14 \
+./bin/STAR --runThreadN 14 \
+	 --readFilesCommand zcat \
      --genomeDir $REF \
      --readFilesIn $FASTQ \
      --outFilterMismatchNoverLmax 0.05 \

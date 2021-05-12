@@ -13,12 +13,12 @@ code/mergePairs.sh rawdata/MPRApool_1/MPRApool_1_S1_L002_R1_001.fastq.gz \
 
 # PREPROCESS AND FILTER
 code/preprocessPairs.py \
-    rawdata/1KGp1.extendedFrags.fastq.gz \
-    rawdata/1KGp1.extendedFrags.prep.fastq.gz
+    /tmp/nsabell/1KGp1.extendedFrags.fastq.gz \
+    /tmp/nsabell/1KGp1.extendedFrags.prep.fastq.gz &
 
 code/preprocessPairs.py \
-    rawdata/1KGp2.extendedFrags.fastq.gz \
-    rawdata/1KGp2.extendedFrags.prep.fastq.gz
+    /tmp/nsabell/1KGp2.extendedFrags.fastq.gz \
+    /tmp/nsabell/1KGp2.extendedFrags.prep.fastq.gz &
 
 # BUILD REFERENCES AND ALIGN WITH STAR
 code/buildReferences.sh
@@ -26,7 +26,7 @@ code/buildReferences.sh
 code/alignOligoBarcodeMaps.sh \
     rawdata/1KGp1.extendedFrags.prep.fastq.gz \
     rawdata/1KGp1 \
-    rawdata/reference/1KG/STAR
+    rawdata/reference
 
 code/alignOligoBarcodeMaps.sh \
     rawdata/1KGp2.extendedFrags.prep.fastq.gz \
