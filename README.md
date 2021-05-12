@@ -12,7 +12,7 @@
 `bash code/barcodeClustering.sh`
 `Rscript code/computeOligoCounts.R`
 
-### Statistical Inference and Molecular Analysis
+### Manuscript Analysis Notebooks
 
 1. [Overview and Replicate Correlations](notebooks/section1-descriptive-statistics.ipynb)
 2. [MPRA Statistical Inference](notebooks/section2-model-inference.ipynb)
