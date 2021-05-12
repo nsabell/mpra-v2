@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+# MERGE PAIRS WITH FLASH2
+code/mergePairs.sh rawdata/MPRApool_1/MPRApool_1_S1_L001_R1_001.fastq.gz \
+                   rawdata/MPRApool_1/MPRApool_1_S1_L001_R2_001.fastq.gz \
+                   rawdata/1KGp1 > \
+                   rawdata/1KGp1_flash.log 2>&1 &
+                   
+code/mergePairs.sh rawdata/MPRApool_1/MPRApool_1_S1_L002_R1_001.fastq.gz \
+                   rawdata/MPRApool_1/MPRApool_1_S1_L002_R2_001.fastq.gz \
+                   rawdata/1KGp2 > \
+                   rawdata/1KGp2_flash.log 2>&1 &
+
+# PREPROCESS AND FILTER
+code/preprocessPairs.py \
+    rawdata/1KGp1.extendedFrags.fastq.gz \
+    rawdata/1KGp1.extendedFrags.preprocessed.fastq.gz
+
+code/preprocessPairs.py \
+    rawdata/1KGp2.extendedFrags.fastq.gz \
+    rawdata/1KGp2.extendedFrags.preprocessed.fastq.gz
+
+# BUILD REFERENCES AND ALIGN WITH STAR
+code/buildReferences.sh
+
+code/alignOligoBarcodeMaps.sh \
+    rawdata/1KGp1.extendedFrags.preprocessed.filtered.fastq \
+    rawdata/1KGp1 \
+    rawdata/reference/1KG/STAR
+
+code/alignOligoBarcodeMaps.sh \
+    rawdata/1KGp2.extendedFrags.preprocessed.filtered.fastq \
+    rawdata/1KGp2 \
+    rawdata/reference
+
+nohup cat \
+    rawdata/1KGp1_STAR_rawOligoBarcodeMap_uniqueMaps.txt \
+    rawdata/1KGp2_STAR_rawOligoBarcodeMap_uniqueMaps.txt > \
+    rawdata/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt &
+    
+nohup cat \
+    rawdata/1KGp1_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt \
+    rawdata/1KGp2_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt > \
+    rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt &
+
+
+# COMPUTE AND WRITE OLIGO MAPS
+nohup code/writeBarcodeOligoMapNonUnique.py \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.log &
+
+cat rawdata/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt
+
+code/writeBarcodeOligoMap.py \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt \
+	rawdata/1KG_STAR_filteredOligoBarcodeMap.txt > \
+	rawdata/1KG_STAR_filteredOligoBarcodeMap.log
+
+# Cluster barcodes using Bartender
+bash code/barcodeClustering.sh
+

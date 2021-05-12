@@ -1,92 +1,64 @@
 #!/usr/bin/env bash
 
-# Command log executed on durga, in contrast to template commands in main README.md
+# MERGE PAIRS WITH FLASH2
+code/mergePairs.sh rawdata/MPRApool_1/MPRApool_1_S1_L001_R1_001.fastq.gz \
+                   rawdata/MPRApool_1/MPRApool_1_S1_L001_R2_001.fastq.gz \
+                   rawdata/1KGp1 > \
+                   rawdata/1KGp1_flash.log 2>&1 &
+                   
+code/mergePairs.sh rawdata/MPRApool_1/MPRApool_1_S1_L002_R1_001.fastq.gz \
+                   rawdata/MPRApool_1/MPRApool_1_S1_L002_R2_001.fastq.gz \
+                   rawdata/1KGp2 > \
+                   rawdata/1KGp2_flash.log 2>&1 &
 
-# Preprocess oligo-barcode maps - GTEX
-code/mergePairs.sh data/rawdata/gtex/GTEX_R1.fastq.gz \
-                   data/rawdata/gtex/GTEX_R2.fastq.gz \
-                   data/processed/gtex/fastq/GTEX > \
-                   data/processed/gtex/fastq/GTEX_flash.log 2>&1 &
-code/preprocessPairs.py data/processed/gtex/GTEX.extendedFrags.fastq.gz data/processed/gtex/
+# PREPROCESS AND FILTER
+code/preprocessPairs.py \
+    rawdata/1KGp1.extendedFrags.fastq.gz \
+    rawdata/1KGp1.extendedFrags.prep.fastq.gz
 
-# Preproces oligo-barcode maps - 1KG
-code/mergePairs.sh data/rawdata/novaseq/MPRApool_1/MPRApool_1_S1_L001_R1_001.fastq.gz \
-                   data/rawdata/novaseq/MPRApool_1/MPRApool_1_S1_L001_R2_001.fastq.gz \
-                   data/processed/1KG/fastq/1KGp1 > \
-                   data/processed/1KG/fastq/1KGp1_flash.log 2>&1 &
-code/mergePairs.sh data/rawdata/novaseq/MPRApool_2/MPRApool_1_S1_L002_R1_001.fastq.gz \
-                   data/rawdata/novaseq/MPRApool_2/MPRApool_1_S1_L002_R2_001.fastq.gz \
-                   data/processed/1KG/fastq/1KGp2 > \
-                   data/processed/1KG/fastq/1KGp2_flash.log 2>&1 &
+code/preprocessPairs.py \
+    rawdata/1KGp2.extendedFrags.fastq.gz \
+    rawdata/1KGp2.extendedFrags.prep.fastq.gz
 
-code/preprocessPairs.py data/processed/1KG/fastq/1KGp1.extendedFrags.fastq.gz data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.fastq.gz
-code/preprocessPairs.py data/processed/1KG/fastq/1KGp2.extendedFrags.fastq.gz data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.fastq.gz
-
-code/filterShortPairs.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.fastq.gz data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.filtered.fastq
-code/filterShortPairs.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.fastq.gz data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.filtered.fastq
-
-# Build references and align to oligo library
+# BUILD REFERENCES AND ALIGN WITH STAR
 code/buildReferences.sh
 
-code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.filtered.fastq data/processed/1KG/bam/1KGp1 data/reference/1KG/STAR
-code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.filtered.fastq data/processed/1KG/bam/1KGp2 data/reference/1KG/STAR
+code/alignOligoBarcodeMaps.sh \
+    rawdata/1KGp1.extendedFrags.prep.fastq.gz \
+    rawdata/1KGp1 \
+    rawdata/reference/1KG/STAR
 
-nohup code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp1.extendedFrags.preprocessed.filtered.fastq /users/nsabell/scratch/mpra-v2/1KGp1 data/reference/1KG/STAR &
-nohup code/alignOligoBarcodeMaps.sh data/processed/1KG/fastq/1KGp2.extendedFrags.preprocessed.filtered.fastq /users/nsabell/scratch/mpra-v2/1KGp2 data/reference/1KG/STAR &
+code/alignOligoBarcodeMaps.sh \
+    rawdata/1KGp2.extendedFrags.prep.fastq.gz \
+    rawdata/1KGp2 \
+    rawdata/reference
 
-nohup cat data/processed/1KG/bam/1KGp1_STAR_rawOligoBarcodeMap_uniqueMaps.txt data/processed/1KG/bam/1KGp2_STAR_rawOligoBarcodeMap_uniqueMaps.txt > data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt &
-nohup cat data/processed/1KG/bam/1KGp1_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt data/processed/1KG/bam/1KGp2_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt > data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt &
+nohup cat \
+    rawdata/1KGp1_STAR_rawOligoBarcodeMap_uniqueMaps.txt \
+    rawdata/1KGp2_STAR_rawOligoBarcodeMap_uniqueMaps.txt > \
+    rawdata/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt
+    
+nohup cat \
+    rawdata/1KGp1_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt \
+    rawdata/1KGp2_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt > \
+    rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt
 
-# Integrate and write oligo-barcode maps
+
+# COMPUTE AND WRITE OLIGO MAPS
 nohup code/writeBarcodeOligoMapNonUnique.py \
-	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt \
-	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
-	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.log &
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.log
 
-cat data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt \
-	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
-	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt
+cat rawdata/1KG_STAR_rawOligoBarcodeMap_uniqueMaps.txt \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_nonUniqueMaps_usable.txt > \
+	rawdata/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt
 
 code/writeBarcodeOligoMap.py \
-	data/processed/1KG/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt \
-	data/processed/1KG/1KG_STAR_filteredOligoBarcodeMap.txt > \
-	data/processed/1KG/1KG_STAR_filteredOligoBarcodeMap.log
+	rawdata/1KG_STAR_rawOligoBarcodeMap_combinedMaps.txt \
+	rawdata/1KG_STAR_filteredOligoBarcodeMap.txt > \
+	rawdata/1KG_STAR_filteredOligoBarcodeMap.log
 
-# Count barcodes in all samples
-for file in data/rawdata/1KG/1KG*fastq.gz ; do
-	outname=`basename $file | cut -d . -f 1`;
-	code/countBarcodes.sh $file data/processed/1KG/barcodeCounts/$outname.txt &
-done
-
-# Compute oligo sums for all samples
-for file in data/processed/1KG/barcodeCounts/*.txt ; do
-	outname=`basename $file | cut -d . -f 1`;
-	code/writeOligoSums.py scratch/1KG_STAR_filteredOligoBarcodeMap.txt $file output/$outname.oligoCount.txt &
-done
-
-# Merge oligo sums across samples
-code/mergeOligoSums.R 
-
-# 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Cluster barcodes using Bartender
+bash code/barcodeClustering.sh
 
