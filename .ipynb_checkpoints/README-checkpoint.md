@@ -1,4 +1,4 @@
-## mpra-v2: analysis of eQTL-derived massively paralell reporter assay data and related utilities
+## FineMapMPRA - Nathan S. Abell and Stephen B. Montgomery
 
 ### Prepare oligo-barcode read pairs
 `bash code/mergePairs.sh <R1_FASTQ> <R2_FASTQ> <output_prefix>`  
@@ -13,3 +13,13 @@
 ### Cluster barcodes and compute count matrix
 `bash code/barcodeClustering.sh`
 `Rscript code/computeOligoCounts.R`
+
+### Statistical inference and molecular analysis
+
+1. [Overview and Replicate Correlations](notebooks/section1-descriptive-statistics.ipynb)
+2. [MPRA Statistical Inference](notebooks/section2-model-inference.ipynb)
+3. [Summary Statistics](notebooks/section2a-model-eval.ipynb)
+4. [Functional Characterization](notebooks/section3-functional-annotation.ipynb)
+5. [eQTL Integration](notebooks/section4-eqtl.ipynb)
+6. 
+7. 
