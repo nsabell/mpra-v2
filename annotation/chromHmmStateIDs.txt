@@ -1,0 +1,18 @@
+E1	TssA	Active TSS	Red	255,0,0
+E2	TssFlnk	Flanking TSS	Orange Red	255,69,0
+E3	TssFlnkU	Flanking TSS Upstream	Orange Red	255,69,0
+E4	TssFlnkD	Flanking TSS Downstream	Orange Red	255,69,0
+E5	Tx	Strong transcription	Green	0,128,0
+E6	TxWk	Weak transcription	DarkGreen	0,100,0
+E7	EnhG1	Genic enhancer1	GreenYellow	194,225,5
+E8	EnhG2	Genic enhancer2	GreenYellow	194,225,5
+E9	EnhA1	Active Enhancer 1	Orange	255,195,77
+E10	EnhA2	Active Enhancer 2	Orange	255,195,77
+E11	EnhWk	Weak Enhancer	Yellow	255,255,0
+E12	ZNF/Rpts	ZNF genes & repeats	Medium Aquamarine	102,205,170
+E13	Het	Heterochromatin	PaleTurquoise	138,145,208
+E14	TssBiv	Bivalent/Poised TSS	IndianRed	205,92,92
+E15	EnhBiv	Bivalent Enhancer	DarkKhaki	189,183,107
+E16	ReprPC	Repressed PolyComb	Silver	128,128,128
+E17	ReprPCWk	Weak Repressed PolyComb	Gainsboro	192,192,192
+E18	Quies	Quiescent/Low	White	255,255,255
