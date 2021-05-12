@@ -1,0 +1,16 @@
+"https://www.encodeproject.org/metadata/?type=Experiment&cart=%2Fcarts%2F617c04c1-2a52-4d37-8002-5696e700c602%2F&files.assembly=hg19&files.output_type=replicated+peaks&files.file_type=bed+narrowPeak"
+https://www.encodeproject.org/files/ENCFF851UKZ/@@download/ENCFF851UKZ.bed.gz
+https://www.encodeproject.org/files/ENCFF354MGT/@@download/ENCFF354MGT.bed.gz
+https://www.encodeproject.org/files/ENCFF233NNT/@@download/ENCFF233NNT.bed.gz
+https://www.encodeproject.org/files/ENCFF983SMS/@@download/ENCFF983SMS.bed.gz
+https://www.encodeproject.org/files/ENCFF052MHA/@@download/ENCFF052MHA.bed.gz
+https://www.encodeproject.org/files/ENCFF921LKB/@@download/ENCFF921LKB.bed.gz
+https://www.encodeproject.org/files/ENCFF682WIQ/@@download/ENCFF682WIQ.bed.gz
+https://www.encodeproject.org/files/ENCFF295GNH/@@download/ENCFF295GNH.bed.gz
+https://www.encodeproject.org/files/ENCFF247VUO/@@download/ENCFF247VUO.bed.gz
+https://www.encodeproject.org/files/ENCFF816AHV/@@download/ENCFF816AHV.bed.gz
+https://www.encodeproject.org/files/ENCFF479XLN/@@download/ENCFF479XLN.bed.gz
+https://www.encodeproject.org/files/ENCFF795URC/@@download/ENCFF795URC.bed.gz
+https://www.encodeproject.org/files/ENCFF308WNH/@@download/ENCFF308WNH.bed.gz
+https://www.encodeproject.org/files/ENCFF584NAD/@@download/ENCFF584NAD.bed.gz
+https://www.encodeproject.org/files/ENCFF357HZM/@@download/ENCFF357HZM.bed.gz
