@@ -17,18 +17,18 @@ REF=$3
 
 samtools index -@ 14 ${OUTPFX}Aligned.sortedByCoord.out.bam
 
-samtools view -@ 10 ${OUTPFX}Aligned.sortedByCoord.out.bam | \
-    awk '{ if ($5 == 255) print $0 }' | \
-    cut -f 1,3,12,14,16 | \
-    cut -d : -f 8- | \
-    sed 's/NH:i://' | \
-    sed 's/AS:i://' | \
-    sed 's/NM:i://' > ${OUTPFX}_STAR_rawOligoBarcodeMap_uniqueMaps.txt
+# samtools view -@ 10 ${OUTPFX}Aligned.sortedByCoord.out.bam | \
+#     awk '{ if ($5 == 255) print $0 }' | \
+#     cut -f 1,3,12,14,16 | \
+#     cut -d : -f 8- | \
+#     sed 's/NH:i://' | \
+#     sed 's/AS:i://' | \
+#     sed 's/NM:i://' > ${OUTPFX}_STAR_rawOligoBarcodeMap_uniqueMaps.txt
 
-samtools view -@ 10 ${OUTPFX}Aligned.sortedByCoord.out.bam  | \
-    awk '{ if ($5 != 255) print $0 }' | \
-    cut -f 1,2,3,12,14,16 | \
-    sed 's/NH:i://' | \
-    sed 's/AS:i://' | \
-    sed 's/NM:i://' | \
-    sort -k 1 >  ${OUTPFX}_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt
+# samtools view -@ 10 ${OUTPFX}Aligned.sortedByCoord.out.bam  | \
+#     awk '{ if ($5 != 255) print $0 }' | \
+#     cut -f 1,2,3,12,14,16 | \
+#     sed 's/NH:i://' | \
+#     sed 's/AS:i://' | \
+#     sed 's/NM:i://' | \
+#     sort -k 1 >  ${OUTPFX}_STAR_rawOligoBarcodeMap_nonUniqueMaps.txt

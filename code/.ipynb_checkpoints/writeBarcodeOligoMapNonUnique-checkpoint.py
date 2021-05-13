@@ -29,11 +29,6 @@ with sys.stdin as file, open(sys.argv[1],'w') as outfile:
 			newLine = file.readline()
 			newLine = newLine.strip().split()
 
-			tmpName = newLine[0]
-			
-			if tmpName != readName:
-				break
-			
 			flags.append(int(newLine[1]))
 			oligos.append(newLine[2])
 			alignCounts.append(int(newLine[3]))
