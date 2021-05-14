@@ -58,3 +58,7 @@ samtools view -@ 15 -q 255 -e '[AS] && [AS]>=100 && [NM] && [NM]<=5' rawdata/1KG
 
 # Cluster barcodes using Bartender
 bash code/barcodeClustering.sh
+
+samtools view -@ 15 rawdata-nextseq/1KG_combined.sortedByName.nonUnique.bam | cut -f 1,2,3,12,14,16 | grep HF7W5BGX2 | sed 's/\t..:.:/\t/g' | code/writeBarcodeOligoMapNonUnique.py rawdata-nextseq/1KG_rawOligoBarcodeMap_nonUnique_usable-run2.txt
+
+samtools view -@ 15 -q 255 -e '[AS] && [AS]>=100 && [NM] && [NM]<=5' rawdata-nextseq/1KG_combinedAligned.sortedByCoord.out.bam | grep HF7W5BGX2 | cut -f 1,3 | cut -d : -f 8- | cat - rawdata-nextseq/1KG_rawOligoBarcodeMap_nonUnique_usable-run2.txt | code/writeBarcodeOligoMap.py rawdata-nextseq/1KG_oligoBarcodeMap-run2.txt

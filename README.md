@@ -1,6 +1,7 @@
 ## FineMapMPRA - Public Repository
 
 ### MPRA Data Bioinformatics
+
 `bash code/mergePairs.sh <R1_FASTQ> <R2_FASTQ> <output_prefix>`  
 `python code/preprocessPairs.py <merged_fastq> <output_prefix>`
 
@@ -11,6 +12,8 @@
 
 `bash code/barcodeClustering.sh`
 `Rscript code/computeOligoCounts.R`
+
+Executed commands on real data are shown in `README.cmds` for data not included here due to size.
 
 ### Manuscript Analysis Notebooks
 
