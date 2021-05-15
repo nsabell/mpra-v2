@@ -7,4 +7,4 @@
 5. [eQTL Integration](notebooks/section4-eqtl.ipynb)
 6. Haplotype Decomposition
 7. GWAS Integration and Colocalization
-8. Supplementary Tables and Data
+8. [Supplementary Tables and Data](supptables)
